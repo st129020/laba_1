@@ -1,35 +1,35 @@
+# Сглаженная кривая распределения с точками данных
 set terminal pngcairo size 900,550 enhanced font "Arial,12"
 set output "plot3_spline_freq.png"
 
-set title "Полигон распределения результатов наблюдений" font "Arial,13"
-set xlabel "Значение" font "Arial,12"
-set ylabel "Δn / n" font "Arial,12"
+set title "Сглаженная кривая распределения результатов" font "Arial,14"
+set xlabel "Значение"
+set ylabel "Число попаданий"
 
-set xrange [3.875:4.125]
-set yrange [0:0.35]
-set ytics 0.05
-set xtics rotate by -45
+set xrange [3.85:4.15]
+set yrange [0:15]
+set xtics 0.03 rotate by -45
+set ytics 1
+set grid ytics
 
-set samples 500
-set grid linestyle 0
-
-plot "-" using 1:2 smooth csplines with lines lc rgb "#2171b5" lw 2.2 notitle, \
-     "-" using 1:2 with points pt 7 ps 1.2 lc rgb "#08519c" notitle
-3.895 0.04
-3.925 0.20
-3.955 0.24
-3.985 0.24
-4.015 0.18
-4.045 0.08
-4.075 0.00
-4.105 0.02
+# Данные: центр интервала, количество
+plot "-" using 1:2 with lines smooth csplines lw 2 lc rgb "#08519c" title "Сглаженная кривая", \
+     "-" using 1:2 with points pt 7 ps 1.5 lc rgb "#d73027" title "Точки данных"
+3.912 10
+3.937 6
+3.962 11
+3.987 9
+4.012 10
+4.037 3
+4.062 1
+4.087 1
 e
-3.895 0.04
-3.925 0.20
-3.955 0.24
-3.985 0.24
-4.015 0.18
-4.045 0.08
-4.075 0.00
-4.105 0.02
+3.912 10
+3.937 6
+3.962 11
+3.987 9
+4.012 10
+4.037 3
+4.062 1
+4.087 1
 e
