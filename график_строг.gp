@@ -10,9 +10,33 @@ set terminal windows
 f(x) = a*x + b
 
 a = 0
+set terminal pngcairo size 900,600 enhanced font "Arial,12"
+set output "C:/Users/User/OneDrive/Documents/лаба1/least_squares_fit.png"
+
+datafile = "C:/Users/User/OneDrive/Documents/лаба1/лаба1.txt"
+set encoding utf8
+set xlabel "Time" font "Arial,12"
+set ylabel "Value" font "Arial,12"
+set title "Least Squares Approximation" font "Arial,14"
+set grid
+set key left top
+
+f(x) = a*x + b
+
+a = 0
+b = 0
+fit f(x) datafile using ($0+1):1 via a,b
+
+plot datafile using ($0+1):1 with points pt 7 ps 1.2 lc rgb "black" title "Data", \
+     f(x) with lines lw 2 lc rgb "red" title sprintf("Linear Fit: y = %.4f x + %.4f", a, b)
+
+print sprintf("Параметры аппроксимации:")
+print sprintf("a = %f", a)
+print sprintf("b = %f", b)
 b = 0
 
 fit f(x) datafile using ($0+1):1 via a,b
 
 plot datafile using ($0+1):1 with points pt 7 ps 1.2 lc rgb "black" title "Data", \
+
      f(x) with lines lw 2 title "Least Squares Fit"
